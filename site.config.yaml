@@ -1,5 +1,5 @@
 site:
-  title: Christoph Hollauers
+  title: Christoph Hollauer
   short_name: C. Hollauer
   tagline: Operator · Founder · Engineer
   headline: I build and fix things<br />that are <span class="hl">supposed to be hard.</span>
@@ -19,14 +19,14 @@ author:
     github: https://github.com/your-profile
     cloudstage: https://cloudstage.io
 sections:
-  thesis: false
-  track_record: false
-  numbers: false
-  speaking_topics: false
-  engagements: false
-  publications: false
+  thesis: true
+  track_record: true
+  numbers: true
+  speaking_topics: true
+  engagements: true
+  publications: true
   publications_preview_count: 5
-  blog_preview: false
+  blog_preview: true
   blog_preview_count: 3
 content:
   thesis_quote: |-
