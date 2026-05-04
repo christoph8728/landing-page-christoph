@@ -18,7 +18,7 @@ author:
   name: "Christoph Hollauer"
   email: "christoph.hollauer@gmail.com"
   location: "Munich"
-  photo: "/assets/photo.jpg"
+  photo: null
   credentials: "Dr.-Ing., TUM"
   current_role: "COO & Co-Founder"
   current_org: "CloudStage GmbH"
