@@ -1,0 +1,193 @@
+# Sveltia CMS configuration
+# Docs: https://github.com/sveltia/sveltia-cms
+#
+# Auth: fine-grained PAT (no OAuth proxy)
+# 1. GitHub → Settings → Developer settings → Personal access tokens → Fine-grained
+# 2. Repository access: only this repo
+# 3. Permissions: Contents (R/W), Metadata (R)
+# 4. Paste the token in Sveltia at first login.
+
+backend:
+  name: github
+  repo: christoph8728/landing-page-christoph
+  branch: main
+  auth_type: pat
+
+# Where Sveltia stores uploads (e.g. blog post images)
+media_folder: public/uploads
+public_folder: /uploads
+
+# Display in CMS only
+site_url: https://christophhollauer.de
+display_url: https://christophhollauer.de
+logo_url: /assets/photo.jpg
+
+collections:
+  # ─── Blog posts ─────────────────────────────────────────────
+  - name: posts
+    label: Blog Posts
+    label_singular: Post
+    folder: content/blog
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}} — {{date | date('YYYY-MM-DD')}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: date, label: Date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false }
+      - { name: tags, label: Tags, widget: list, default: [], required: false }
+      - { name: draft, label: Draft, widget: boolean, default: false, required: false }
+      - { name: summary, label: Summary, widget: text, required: false, hint: "Optional. ~160 chars. If empty, generated from body." }
+      - { name: og_image, label: Custom OG Image, widget: image, required: false, hint: "Optional. Leave blank to use auto-generated card." }
+      - { name: body, label: Body, widget: markdown }
+
+  # ─── Publications ───────────────────────────────────────────
+  - name: publications
+    label: Publications
+    label_singular: Publication
+    folder: content/publications
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    summary: "{{year}} — {{title}}"
+    sortable_fields: [year, date, title]
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: authors, label: Authors, widget: list, default: ["Christoph Hollauer"] }
+      - { name: year, label: Year, widget: number, value_type: int, min: 1900, max: 2100 }
+      - { name: venue, label: Venue, widget: string }
+      - name: type
+        label: Type
+        widget: select
+        options: ["Journal Article", "Conference Paper", "Book Chapter", "Doctoral Thesis", "Workshop Paper"]
+        default: "Conference Paper"
+      - { name: doi, label: DOI, widget: string, required: false }
+      - { name: url, label: URL, widget: string, required: false }
+      - { name: highlight, label: Highlighted, widget: boolean, default: false, required: false, hint: "Show in featured section on homepage." }
+      - { name: date, label: Sort Date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false }
+
+  # ─── Speaking engagements ───────────────────────────────────
+  - name: speaking
+    label: Speaking Engagements
+    label_singular: Engagement
+    folder: content/speaking
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    summary: "{{date | date('YYYY-MM')}} — {{title}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Talk Title, widget: string }
+      - { name: event, label: Event, widget: string }
+      - { name: location, label: Location, widget: string, required: false }
+      - name: type
+        label: Format
+        widget: select
+        options: ["Keynote", "Panel", "Workshop", "Fireside", "Lecture"]
+        default: "Keynote"
+      - { name: date, label: Date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false }
+
+  # ─── Track record ───────────────────────────────────────────
+  - name: track_record
+    label: Track Record
+    label_singular: Role
+    folder: content/track-record
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    summary: "{{period}} — {{title}} @ {{organization}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Role, widget: string }
+      - { name: organization, label: Organization, widget: string }
+      - { name: period, label: Period, widget: string, hint: "Display string, e.g. \"2025 – now\"" }
+      - { name: date, label: Sort Date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, hint: "Used for sorting (newest first)." }
+      - { name: description, label: Description, widget: text }
+      - { name: tags, label: Tags, widget: list, default: [], required: false }
+
+  # ─── Site config (singleton) ────────────────────────────────
+  - name: site
+    label: Site Settings
+    files:
+      - name: site_config
+        label: Site Config (site.config.yaml)
+        file: site.config.yaml
+        format: yaml
+        fields:
+          - name: site
+            label: Identity
+            widget: object
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: short_name, label: Short name, widget: string }
+              - { name: tagline, label: Tagline, widget: string }
+              - { name: headline, label: Headline (HTML allowed), widget: text }
+              - { name: description, label: Meta description, widget: text }
+              - { name: url, label: URL, widget: string }
+              - { name: language, label: Language, widget: string }
+          - name: author
+            label: Author
+            widget: object
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: email, label: Email, widget: string }
+              - { name: location, label: Location, widget: string }
+              - { name: photo, label: Portrait path, widget: string, required: false }
+              - { name: credentials, label: Credentials, widget: string, required: false }
+              - { name: current_role, label: Current role, widget: string, required: false }
+              - { name: current_org, label: Current org, widget: string, required: false }
+              - name: socials
+                label: Social links
+                widget: object
+                fields:
+                  - { name: linkedin, label: LinkedIn, widget: string, required: false }
+                  - { name: github, label: GitHub, widget: string, required: false }
+                  - { name: cloudstage, label: CloudStage, widget: string, required: false }
+          - name: sections
+            label: Section toggles
+            widget: object
+            fields:
+              - { name: thesis, label: Thesis, widget: boolean }
+              - { name: track_record, label: Track Record, widget: boolean }
+              - { name: numbers, label: Numbers, widget: boolean }
+              - { name: speaking_topics, label: Speaking Topics, widget: boolean }
+              - { name: engagements, label: Engagements, widget: boolean }
+              - { name: publications, label: Publications, widget: boolean }
+              - { name: publications_preview_count, label: Pubs preview count, widget: number, value_type: int, default: 5 }
+              - { name: blog_preview, label: Blog Preview, widget: boolean }
+              - { name: blog_preview_count, label: Blog preview count, widget: number, value_type: int, default: 3 }
+          - name: content
+            label: Page content
+            widget: object
+            fields:
+              - { name: thesis_quote, label: Thesis Quote (pull-quote), widget: text }
+              - { name: thesis_supporting, label: Thesis Supporting paragraph, widget: text }
+              - name: numbers
+                label: Numbers (dark band)
+                widget: list
+                fields:
+                  - { name: value, label: "Value (HTML — wrap headline in <u>)", widget: string }
+                  - { name: label, label: Label, widget: text }
+                  - { name: context, label: Context line, widget: string, required: false }
+              - name: speaking_topics
+                label: Speaking topics
+                widget: list
+                fields:
+                  - { name: title, label: Title, widget: string }
+                  - { name: slug, label: URL slug, widget: string, required: false }
+                  - { name: format, label: Format, widget: string }
+                  - { name: audience, label: Audience, widget: string, required: false }
+                  - { name: description, label: Description, widget: text }
+              - name: cta
+                label: CTA card
+                widget: object
+                fields:
+                  - { name: heading, label: Heading (plain), widget: string }
+                  - { name: heading_html, label: Heading (HTML), widget: string, required: false }
+                  - { name: description, label: Description, widget: text }

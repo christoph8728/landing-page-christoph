@@ -1,0 +1,17 @@
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+.env
+.env.local
+.DS_Store
+
+# Build artifacts that are generated
+public/feed.xml
+public/atom.xml
+
+# Local handover artifacts (kept out of repo)
+2026-04-30 handover v2/
+Christoph Landing Page.zip
+claude_input/
+claude-code-blog-improvements.md
