@@ -1,103 +1,99 @@
-# ============================================================
-# SITE CONFIGURATION
-# Single source of truth. Every toggleable decision lives here.
-# ============================================================
-
-# --- Identity ---
 site:
-  title: "Christoph Hollauer"
-  short_name: "C. Hollauer"
-  tagline: "Operator · Founder · Engineer"
-  headline: "I build and fix things<br />that are <span class=\"hl\">supposed to be hard.</span>"
-  description: "COO & Co-Founder at CloudStage. Former SVP Operations at ARRI. Turnaround operator, marketplace builder, Dr.-Ing. TUM."
-  url: "https://christophhollauer.de"
-  language: "en"
-
-# --- Author ---
+  title: Christoph Hollauer
+  short_name: C. Hollauer
+  tagline: Operator · Founder · Engineer
+  headline: I build and fix things<br />that are <span class="hl">supposed to be hard.</span>
+  description: COO & Co-Founder at CloudStage. Former SVP Operations at ARRI. Turnaround operator, marketplace builder, Dr.-Ing. TUM.
+  url: https://christophhollauer.de
+  language: en
 author:
-  name: "Christoph Hollauer"
-  email: "christoph.hollauer@gmail.com"
-  location: "Munich"
-  photo: null
-  credentials: "Dr.-Ing., TUM"
-  current_role: "COO & Co-Founder"
-  current_org: "CloudStage GmbH"
+  name: Christoph Hollauer
+  email: christoph.hollauer@gmail.com
+  location: Munich
+  photo: ''
+  credentials: Dr.-Ing., TUM
+  current_role: COO & Co-Founder
+  current_org: CloudStage GmbH
   socials:
-    linkedin: "https://linkedin.com/in/your-profile"
-    github: "https://github.com/your-profile"
-    cloudstage: "https://cloudstage.io"
-    # twitter: null
-    # mastodon: null
-    # orcid: null
-
-# --- Sections (landing page) ---
+    linkedin: https://linkedin.com/in/your-profile
+    github: https://github.com/your-profile
+    cloudstage: https://cloudstage.io
 sections:
-  thesis: true
+  thesis: false
   track_record: true
   numbers: true
   speaking_topics: true
-  engagements: true          # auto-hides when no entries exist
+  engagements: false
   publications: true
   publications_preview_count: 5
   blog_preview: true
   blog_preview_count: 3
-
-# --- Content ---
 content:
-  thesis_quote: |
+  thesis_quote: |-
     Most "transformation" projects fail because they're led by
     people who've never run the thing they're transforming.
-
-  thesis_supporting: |
+  thesis_supporting: |-
     A decade on the inside — restructuring operations, building
     systems, and shipping product in industries that don't move
     fast and don't forgive mistakes. Now I'm applying that
     experience to building <strong>infrastructure from scratch</strong>
     — a B2B marketplace for an industry that still runs on phone
     calls and PDF quotes.
-
   numbers:
-    - value: "<u>90</u>&nbsp;people"
-      label: "Operations team led at ARRI Lighting through manufacturing restructuring and strategic outsourcing."
-      context: "2022 – 2025 · Munich"
-
-    - value: "<u>€25M+</u>"
-      label: "Cost reduction programs delivered at Wacker Neuson — across construction equipment and e-mobility, reported to the executive board."
-      context: "2019 – 2022 · Group level"
-
-    - value: "<u>40+</u>&nbsp;papers"
-      label: "Peer-reviewed publications across journals and conferences — engineering design, complexity, product-service systems."
-      context: "2013 – 2019 · TUM"
-
-    - value: "<u>1</u>&nbsp;company"
-      label: "Co-founded and currently building — transactional B2B marketplace, zero to one, from Munich."
-      context: "2025 – now · CloudStage"
-
+    - value: <u>90</u>&nbsp;people
+      label: Operations team led at ARRI Lighting through manufacturing restructuring and strategic outsourcing.
+      context: 2022 – 2025 · Munich
+    - value: <u>€25M+</u>
+      label: Cost reduction programs delivered at Wacker Neuson — across construction equipment and e-mobility, reported to the executive board.
+      context: 2019 – 2022 · Group level
+    - value: <u>40+</u>&nbsp;papers
+      label: Peer-reviewed publications across journals and conferences — engineering design, complexity, product-service systems.
+      context: 2013 – 2019 · TUM
+    - value: <u>1</u>&nbsp;company
+      label: Co-founded and currently building — transactional B2B marketplace, zero to one, from Munich.
+      context: 2025 – now · CloudStage
   speaking_topics:
-    - title: "The Turnaround Myth — why restructuring fails when you follow the playbook"
-      slug: "turnaround-myth"
-      format: "Keynote · 25 min"
-      audience: "Operators & PE"
-      description: "What actually happens when you restructure a manufacturing operation from the inside — not from a slide deck. Decision-making under ambiguity, organizational friction, and why most playbooks don't survive contact with reality."
-
-    - title: "The Analog Problem — why digital transformation isn't a technology project"
-      slug: "analog-problem"
-      format: "Keynote · 25 min"
-      audience: "Industry · Tech"
-      description: "Why \"digital transformation\" fails when it's treated as a technology project. Lessons from bringing transactional infrastructure to an industry that's been analog for decades."
-
-    - title: "The Engineer's Founder — why structure beats hustle in early-stage chaos"
-      slug: "engineers-founder"
-      format: "Keynote & Panel · Variable"
-      audience: "Founders · VCs"
-      description: "The founder's transition from operator to builder. Making irreversible decisions with incomplete information, and why a structured engineering mindset is an unfair advantage."
-
+    - title: The Turnaround Myth — why restructuring fails when you follow the playbook
+      slug: turnaround-myth
+      format: Keynote · 25 min
+      audience: Operators & PE
+      description: What actually happens when you restructure a manufacturing operation from the inside — not from a slide deck. Decision-making under ambiguity, organizational friction, and why most playbooks don't survive contact with reality.
+    - title: The Analog Problem — why digital transformation isn't a technology project
+      slug: analog-problem
+      format: Keynote · 25 min
+      audience: Industry · Tech
+      description: Why "digital transformation" fails when it's treated as a technology project. Lessons from bringing transactional infrastructure to an industry that's been analog for decades.
+    - title: The Engineer's Founder — why structure beats hustle in early-stage chaos
+      slug: engineers-founder
+      format: Keynote & Panel · Variable
+      audience: Founders · VCs
+      description: The founder's transition from operator to builder. Making irreversible decisions with incomplete information, and why a structured engineering mindset is an unfair advantage.
   cta:
-    heading: "Let's talk."
-    heading_html: 'Let&rsquo;s <em>talk.</em>'
-    description: "Available for select speaking engagements, advisory roles, and the occasional conversation that's actually interesting."
-
-# --- Features ---
+    heading: Let's talk.
+    heading_html: Let&rsquo;s <em>talk.</em>
+    description: Available for select speaking engagements, advisory roles, and the occasional conversation that's actually interesting.
+design:
+  max_width: 960px
+  color_border_strong: '#CFCAC0'
+  color_border: '#E2DFD8'
+  color_teal: '#115E59'
+  color_accent_amber: '#E8AC6F'
+  color_accent_hover: '#B45309'
+  color_accent: '#9F580A'
+  color_text_faint: '#A8A29E'
+  color_text_muted: '#78716C'
+  color_text_mid: '#44403C'
+  color_text: '#1C1917'
+  color_card: '#FFFFFF'
+  color_bg_alt: '#EBE7DF'
+  color_bg: '#F4F2EE'
+  font_mono: IBM Plex Mono
+  font_body: Outfit
+analytics:
+  plausible:
+    script_url: https://plausible.io/js/script.js
+    domain: christophhollauer.de
+  provider: plausible
 features:
   blog: true
   rss: true
@@ -106,55 +102,22 @@ features:
   reading_time: true
   open_graph: true
   sitemap: true
-
-# --- Rendering ---
 rendering:
-  blog_mode: "dynamic"       # "dynamic" | "static" | "isr"
-  revalidate_seconds: 3600   # isr mode: background rebuild interval
-  revalidate_cron: "0 6 * * *"  # static mode: daily cron schedule
-
-# --- Analytics ---
-analytics:
-  provider: "plausible"      # "plausible" | "umami" | null
-  plausible:
-    domain: "christophhollauer.de"
-    script_url: "https://plausible.io/js/script.js"
-  # umami:
-  #   website_id: "xxx"
-  #   script_url: "https://your-umami.de/umami.js"
-
-# --- Design ---
-design:
-  font_body: "Outfit"
-  font_mono: "IBM Plex Mono"
-  color_bg: "#F4F2EE"
-  color_bg_alt: "#EBE7DF"
-  color_card: "#FFFFFF"
-  color_text: "#1C1917"
-  color_text_mid: "#44403C"
-  color_text_muted: "#78716C"
-  color_text_faint: "#A8A29E"
-  color_accent: "#9F580A"
-  color_accent_hover: "#B45309"
-  color_accent_amber: "#E8AC6F"
-  color_teal: "#115E59"
-  color_border: "#E2DFD8"
-  color_border_strong: "#CFCAC0"
-  max_width: "960px"
-
-# --- Nav ---
+  blog_mode: dynamic
+  revalidate_seconds: 3600
+  revalidate_cron: 0 6 * * *
 nav:
-  - label: "Thesis"
-    href: "/#thesis"
-  - label: "Track Record"
-    href: "/#record"
-  - label: "Speaking"
-    href: "/#topics"
-  - label: "Publications"
-    href: "/#publications"
-    requires: "sections.publications"
-  - label: "Writing"
-    href: "/blog"
-    requires: "features.blog"
-  - label: "Contact"
-    href: "/#contact"
+  - label: Thesis
+    href: /#thesis
+  - label: Track Record
+    href: /#record
+  - label: Speaking
+    href: /#topics
+  - label: Publications
+    href: /#publications
+    requires: sections.publications
+  - label: Writing
+    href: /blog
+    requires: features.blog
+  - label: Contact
+    href: /#contact
