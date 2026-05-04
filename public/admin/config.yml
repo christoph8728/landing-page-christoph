@@ -1,17 +1,14 @@
 # Sveltia CMS configuration
-# Docs: https://github.com/sveltia/sveltia-cms
+# Docs: https://sveltiacms.app/en/docs/backends/github
 #
-# Auth: fine-grained PAT (no OAuth proxy)
-# 1. GitHub → Settings → Developer settings → Personal access tokens → Fine-grained
-# 2. Repository access: only this repo
-# 3. Permissions: Contents (R/W), Metadata (R)
-# 4. Paste the token in Sveltia at first login.
+# Auth: at the login screen, click "Sign In with Token". Sveltia opens a
+# pre-filled GitHub PAT generation page with the correct scopes — generate,
+# copy, paste. The token is stored in browser localStorage.
 
 backend:
   name: github
   repo: christoph8728/landing-page-christoph
   branch: main
-  auth_type: pat
 
 # Where Sveltia stores uploads (e.g. blog post images)
 media_folder: public/uploads
