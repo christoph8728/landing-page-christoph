@@ -20,13 +20,13 @@ author:
     cloudstage: https://cloudstage.io
 sections:
   thesis: false
-  track_record: true
-  numbers: true
-  speaking_topics: true
+  track_record: false
+  numbers: false
+  speaking_topics: false
   engagements: false
-  publications: true
+  publications: false
   publications_preview_count: 5
-  blog_preview: true
+  blog_preview: false
   blog_preview_count: 3
 content:
   thesis_quote: |-
