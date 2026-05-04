@@ -1,5 +1,6 @@
 import { getConfig } from "@/lib/config";
 import { getContentBySlug, getAllSlugs } from "@/lib/content";
+import { bp } from "@/lib/path";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ImageLightbox from "@/components/ImageLightbox";
@@ -74,7 +75,7 @@ export default async function BlogPost({
   // emits a static PNG at /blog/<slug>/opengraph-image.png at build time;
   // a frontmatter `og_image` overrides that.
   const ogImage = (post.og_image as string | undefined)
-    ?? `/blog/${post.slug}/opengraph-image.png`;
+    ?? bp(`/blog/${post.slug}/opengraph-image.png`);
   const description =
     (post.summary as string) ||
     (post.excerpt as string) ||
@@ -120,7 +121,7 @@ export default async function BlogPost({
           />
         </ImageLightbox>
         <footer className="post-footer">
-          <a href="/blog" className="blog-more">
+          <a href={bp("/blog")} className="blog-more">
             ← All posts
           </a>
         </footer>

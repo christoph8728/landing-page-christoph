@@ -1,4 +1,5 @@
 import { getConfig } from "@/lib/config";
+import { bp } from "@/lib/path";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -63,7 +64,7 @@ export default async function TalkPage({
           <a href={`mailto:${author.email}`} className="btn-primary">
             Book this talk
           </a>
-          <a href="/#topics" className="blog-more">
+          <a href={bp("/") + "#topics"} className="blog-more">
             ← All talks
           </a>
         </footer>

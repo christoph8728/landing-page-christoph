@@ -1,5 +1,6 @@
 import { getConfig } from "@/lib/config";
 import { getAllContent } from "@/lib/content";
+import { bp } from "@/lib/path";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -38,7 +39,7 @@ export default function BlogIndex() {
           <div className="blog-list">
             {byYear[year].map((post) => (
               <a
-                href={`/blog/${post.slug}`}
+                href={bp(`/blog/${post.slug}`)}
                 className="blog-entry"
                 key={post.slug}
               >

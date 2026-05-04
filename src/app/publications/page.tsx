@@ -1,4 +1,5 @@
 import { getAllContent } from "@/lib/content";
+import { bp } from "@/lib/path";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -65,7 +66,7 @@ export default function PublicationsIndex() {
         </div>
       ))}
 
-      <a href="/" className="blog-more" style={{ marginTop: "2rem" }}>
+      <a href={bp("/")} className="blog-more" style={{ marginTop: "2rem" }}>
         ← Home
       </a>
     </main>

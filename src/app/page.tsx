@@ -12,6 +12,7 @@
 
 import { getConfig } from "@/lib/config";
 import { getAllContent } from "@/lib/content";
+import { bp } from "@/lib/path";
 
 export default function Home() {
   const config = getConfig();
@@ -92,7 +93,7 @@ export default function Home() {
         </div>
         {author.photo ? (
           <div className="hero-photo">
-            <img src={author.photo} alt={author.name} />
+            <img src={bp(author.photo as string)} alt={author.name} />
             <span className="ringmark">01</span>
             <div className="stamp">
               <b>{author.name}</b>
@@ -240,7 +241,7 @@ export default function Home() {
                   .replace(/[^a-z0-9]+/g, "-")
                   .replace(/^-|-$/g, "");
               return (
-                <a href={`/speaking/${slug}`} className="topic" key={index}>
+                <a href={bp(`/speaking/${slug}`)} className="topic" key={index}>
                   <span className="topic-num">
                     {String(index + 1).padStart(2, "0")}
                   </span>
@@ -365,7 +366,7 @@ export default function Home() {
 
           {regularPubs.length > ((sections as any).publications_preview_count ?? 5) && (
             <a
-              href="/publications"
+              href={bp("/publications")}
               className="blog-more"
               style={{ marginTop: "2rem" }}
             >
@@ -386,7 +387,7 @@ export default function Home() {
             <div className="blog-list">
               {blogPosts.map((post) => (
                 <a
-                  href={`/blog/${post.slug}`}
+                  href={bp(`/blog/${post.slug}`)}
                   className="blog-entry"
                   key={post.slug}
                 >
@@ -403,7 +404,7 @@ export default function Home() {
                 </a>
               ))}
             </div>
-            <a href="/blog" className="blog-more">
+            <a href={bp("/blog")} className="blog-more">
               All posts
             </a>
           </div>

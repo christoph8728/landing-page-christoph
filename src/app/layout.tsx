@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { getConfig, getActiveNav } from "@/lib/config";
+import { bp } from "@/lib/path";
 import "./globals.css";
 
 export function generateMetadata(): Metadata {
@@ -57,13 +58,13 @@ export default function RootLayout({
               rel="alternate"
               type="application/rss+xml"
               title={`${config.site.title} - RSS`}
-              href="/feed.xml"
+              href={bp("/feed.xml")}
             />
             <link
               rel="alternate"
               type="application/atom+xml"
               title={`${config.site.title} - Atom`}
-              href="/atom.xml"
+              href={bp("/atom.xml")}
             />
           </>
         )}
@@ -87,7 +88,7 @@ export default function RootLayout({
       <body>
         <nav className="site-nav" aria-label="Primary">
           <div className="nav-inner">
-            <a href="/#top" className="nav-brand">
+            <a href={bp("/") + "#top"} className="nav-brand">
               <span className="dot" />
               {config.site.title}
             </a>
@@ -98,14 +99,14 @@ export default function RootLayout({
                   const sectionId = item.href.replace(/^.*#/, "");
                   return (
                     <li key={item.href}>
-                      <a href={item.href} data-section={sectionId}>
+                      <a href={bp(item.href)} data-section={sectionId}>
                         {item.label}
                       </a>
                     </li>
                   );
                 })}
             </ul>
-            <a href="/#contact" className="nav-cta always">
+            <a href={bp("/") + "#contact"} className="nav-cta always">
               Get in touch
             </a>
           </div>
