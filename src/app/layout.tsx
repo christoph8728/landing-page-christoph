@@ -70,11 +70,15 @@ export default function RootLayout({
         )}
         {config.analytics.provider === "plausible" &&
           config.analytics.plausible && (
-            <script
-              defer
-              data-domain={config.analytics.plausible.domain}
-              src={config.analytics.plausible.script_url}
-            />
+            <>
+              <script async src={config.analytics.plausible.script_url} />
+              <script
+                dangerouslySetInnerHTML={{
+                  __html:
+                    "window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()",
+                }}
+              />
+            </>
           )}
         {config.analytics.provider === "umami" &&
           config.analytics.umami && (

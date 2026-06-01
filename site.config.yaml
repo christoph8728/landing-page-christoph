@@ -91,7 +91,7 @@ design:
   font_body: Outfit
 analytics:
   plausible:
-    script_url: https://plausible.io/js/script.js
+    script_url: https://plausible.digitalmeditations.net/js/pa-6sp76KKbtvW422rGOzSxI.js
     domain: christophhollauer.de
   provider: plausible
 features:
