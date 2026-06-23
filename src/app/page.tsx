@@ -10,9 +10,16 @@
 //   - Speaking topics: numbered cards with `<a>` wrapper anchored to #contact.
 //   - CTA: dark inverse card; reads same fields as before.
 
+import type { Metadata } from "next";
 import { getConfig } from "@/lib/config";
 import { getAllContent } from "@/lib/content";
 import { bp } from "@/lib/path";
+
+// Canonical for the homepage. Resolved against metadataBase (site.url) set in
+// the root layout. Trailing slash matches next.config `trailingSlash: true`.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   const config = getConfig();
@@ -54,11 +61,38 @@ export default function Home() {
     description: config.site.description,
   };
 
+  // Person schema for entity/knowledge-graph recognition. Driven by site.config.yaml.
+  // `sameAs` is built only from real social URLs — placeholder values shipped in the
+  // config (…/your-profile) are filtered out so we never publish fake profiles.
+  // TODO: add real LinkedIn + GitHub URLs under author.socials in site.config.yaml;
+  //       they will then flow into sameAs automatically (and into the footer).
+  const sameAs = [author.socials.linkedin, author.socials.github].filter(
+    (u): u is string => !!u && !u.includes("your-profile")
+  );
+
+  const personLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: author.name,
+    jobTitle: author.current_role, // "COO & Co-Founder"
+    worksFor: { "@type": "Organization", name: author.current_org },
+    description:
+      "Operations and turnaround leadership in industrial and production services; previously SVP Operations at ARRI Lighting.",
+    url: config.site.url,
+    ...(author.credentials ? { honorificSuffix: author.credentials } : {}),
+    ...(author.location ? { homeLocation: author.location } : {}),
+    ...(sameAs.length > 0 ? { sameAs } : {}),
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }}
       />
 
       {/* ===== HERO ===== */}

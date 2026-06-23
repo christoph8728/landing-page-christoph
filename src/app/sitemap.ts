@@ -14,26 +14,45 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
+      // Trailing slashes match next.config `trailingSlash: true` and the
+      // per-page canonical URLs, so crawlers don't hit 308 redirects.
+      url: `${baseUrl}/`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/blog`,
+      url: `${baseUrl}/blog/`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/publications/`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
     },
   ];
 
   // Blog posts
   const blogPosts: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
+    url: `${baseUrl}/blog/${post.slug}/`,
     lastModified: new Date(post.date),
     changeFrequency: "yearly",
     priority: 0.6,
   }));
 
-  return [...staticPages, ...blogPosts];
+  // Speaking topic pages — mirror the route's generateStaticParams
+  // (src/app/speaking/[slug]/page.tsx), which only renders topics with a slug.
+  const speakingPages: MetadataRoute.Sitemap = config.content.speaking_topics
+    .filter((t) => t.slug)
+    .map((t) => ({
+      url: `${baseUrl}/speaking/${t.slug}/`,
+      lastModified: new Date(),
+      changeFrequency: "yearly" as const,
+      priority: 0.5,
+    }));
+
+  return [...staticPages, ...blogPosts, ...speakingPages];
 }

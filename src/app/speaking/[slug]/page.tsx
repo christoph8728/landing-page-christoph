@@ -30,6 +30,7 @@ export async function generateMetadata({
   return {
     title: topic.title,
     description: topic.description,
+    alternates: { canonical: `/speaking/${slug}/` },
   };
 }
 
