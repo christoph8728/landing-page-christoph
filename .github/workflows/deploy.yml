@@ -29,10 +29,8 @@ jobs:
         run: npm ci
 
       - name: Build
-        env:
-          # Remove this when the custom domain (christophhollauer.de) is live —
-          # the site then serves from the apex and basePath should be empty.
-          BASE_PATH: /landing-page-christoph
+        # Custom domain christophhollauer.de is live and serves from the apex
+        # root, so basePath stays empty (BASE_PATH unset).
         run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
