@@ -1,7 +1,8 @@
-import { getConfig } from "@/lib/config";
+import { getConfig, isComingSoon } from "@/lib/config";
 import { bp } from "@/lib/path";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import ComingSoon from "@/components/ComingSoon";
 
 export function generateStaticParams() {
   return getConfig().content.speaking_topics
@@ -24,6 +25,10 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
+  // Sealed: don't advertise the hidden talk (title/canonical) in <head>.
+  if (isComingSoon()) {
+    return { title: getConfig().site.title, robots: { index: false, follow: false } };
+  }
   const { slug } = await params;
   const topic = findTopic(slug);
   if (!topic) return { title: "Not Found" };
@@ -39,6 +44,8 @@ export default async function TalkPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  if (isComingSoon()) return <ComingSoon />;
+
   const { slug } = await params;
   const topic = findTopic(slug);
   if (!topic) notFound();

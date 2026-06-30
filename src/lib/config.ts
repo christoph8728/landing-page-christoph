@@ -41,6 +41,7 @@ export type SiteConfig = {
     reading_time: boolean;
     open_graph: boolean;
     sitemap: boolean;
+    coming_soon?: boolean;
   };
   rendering: {
     blog_mode: "dynamic" | "static" | "isr";
@@ -79,6 +80,17 @@ export function getConfig(): SiteConfig {
   const raw = fs.readFileSync(configPath, "utf8");
   _config = yaml.load(raw) as SiteConfig;
   return _config;
+}
+
+/**
+ * Whether the site is in "Coming Soon" mode. Single source of truth:
+ * `features.coming_soon` in site.config.yaml. When true, every public route is
+ * sealed behind a minimal Coming Soon page and search engines are told not to
+ * index. Read at build time (the site is statically exported), so flipping it
+ * requires a rebuild/redeploy.
+ */
+export function isComingSoon(): boolean {
+  return getConfig().features.coming_soon === true;
 }
 
 /**

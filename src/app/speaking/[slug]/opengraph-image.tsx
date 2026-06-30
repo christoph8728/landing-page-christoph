@@ -1,4 +1,4 @@
-import { getConfig } from "@/lib/config";
+import { getConfig, isComingSoon } from "@/lib/config";
 import { renderOg, ogSize, ogContentType } from "@/lib/og/render";
 import { notFound } from "next/navigation";
 
@@ -18,6 +18,10 @@ export default async function OG({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  // Sealed: render the generic site card so the talk title doesn't leak via OG.
+  if (isComingSoon()) {
+    return renderOg({ title: getConfig().author.name });
+  }
   const { slug } = await params;
   const topic = getConfig().content.speaking_topics.find((t) => {
     const s =

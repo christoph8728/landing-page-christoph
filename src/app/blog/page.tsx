@@ -1,7 +1,8 @@
-import { getConfig } from "@/lib/config";
+import { getConfig, isComingSoon } from "@/lib/config";
 import { getAllContent } from "@/lib/content";
 import { bp } from "@/lib/path";
 import type { Metadata } from "next";
+import ComingSoon from "@/components/ComingSoon";
 
 export const metadata: Metadata = {
   title: "Writing",
@@ -9,6 +10,8 @@ export const metadata: Metadata = {
 };
 
 export default function BlogIndex() {
+  if (isComingSoon()) return <ComingSoon />;
+
   const config = getConfig();
   const posts = getAllContent("blog");
 

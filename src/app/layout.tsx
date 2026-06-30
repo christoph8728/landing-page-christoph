@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { getConfig, getActiveNav } from "@/lib/config";
+import { getConfig, getActiveNav, isComingSoon } from "@/lib/config";
 import { bp } from "@/lib/path";
 import "./globals.css";
 
@@ -11,6 +11,8 @@ export function generateMetadata(): Metadata {
     title: { default: site.title, template: `%s — ${site.short_name}` },
     description: site.description,
     metadataBase: new URL(site.url),
+    // While in Coming Soon mode, keep the placeholder out of search results.
+    ...(isComingSoon() ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       title: site.title,
       description: site.description,
@@ -35,6 +37,7 @@ export default function RootLayout({
 }) {
   const config = getConfig();
   const navItems = getActiveNav();
+  const comingSoon = isComingSoon();
   const activeSocials = Object.entries(config.author.socials).filter(
     ([, v]) => v != null
   );
@@ -90,6 +93,8 @@ export default function RootLayout({
           )}
       </head>
       <body>
+        {!comingSoon && (
+        <>
         <nav className="site-nav" aria-label="Primary">
           <div className="nav-inner">
             <a href={bp("/") + "#top"} className="nav-brand">
@@ -137,9 +142,12 @@ export default function RootLayout({
             window.addEventListener('scroll', update, { passive: true });
           })();
         `}</Script>
+        </>
+        )}
 
         {children}
 
+        {!comingSoon && (
         <footer>
           <div className="foot-links">
             {activeSocials.map(([key, url]) => (
@@ -153,6 +161,7 @@ export default function RootLayout({
             {config.author.location}
           </span>
         </footer>
+        )}
       </body>
     </html>
   );

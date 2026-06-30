@@ -1,12 +1,24 @@
 import type { MetadataRoute } from "next";
 import { getAllContent } from "@/lib/content";
-import { getConfig } from "@/lib/config";
+import { getConfig, isComingSoon } from "@/lib/config";
 
 export const dynamic = "force-static";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const config = getConfig();
   const baseUrl = config.site.url;
+
+  // Coming Soon mode: only the homepage exists; everything else is sealed.
+  if (isComingSoon()) {
+    return [
+      {
+        url: `${baseUrl}/`,
+        lastModified: new Date(),
+        changeFrequency: "daily",
+        priority: 1.0,
+      },
+    ];
+  }
 
   // Get all published blog posts (already filtered for drafts and future dates)
   const posts = getAllContent("blog");

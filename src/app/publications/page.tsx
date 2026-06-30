@@ -1,6 +1,8 @@
 import { getAllContent } from "@/lib/content";
+import { isComingSoon } from "@/lib/config";
 import { bp } from "@/lib/path";
 import type { Metadata } from "next";
+import ComingSoon from "@/components/ComingSoon";
 
 export const metadata: Metadata = {
   title: "Publications",
@@ -8,6 +10,8 @@ export const metadata: Metadata = {
 };
 
 export default function PublicationsIndex() {
+  if (isComingSoon()) return <ComingSoon />;
+
   const publications = getAllContent("publications");
 
   if (publications.length === 0) {

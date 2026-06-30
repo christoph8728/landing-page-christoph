@@ -1,10 +1,11 @@
-import { getConfig } from "@/lib/config";
+import { getConfig, isComingSoon } from "@/lib/config";
 import { getContentBySlug, getAllSlugs } from "@/lib/content";
 import { bp } from "@/lib/path";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ImageLightbox from "@/components/ImageLightbox";
 import ReadingProgress from "@/components/ReadingProgress";
+import ComingSoon from "@/components/ComingSoon";
 
 export async function generateStaticParams() {
   return getAllSlugs("blog").map((slug) => ({ slug }));
@@ -16,6 +17,10 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const config = getConfig();
+  // Sealed: don't advertise the hidden post (title/canonical/OG) in <head>.
+  if (isComingSoon()) {
+    return { title: config.site.title, robots: { index: false, follow: false } };
+  }
   const { slug } = await params;
   const post = await getContentBySlug("blog", slug);
   if (!post) return { title: "Not Found" };
@@ -60,6 +65,8 @@ export default async function BlogPost({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  if (isComingSoon()) return <ComingSoon />;
+
   const config = getConfig();
   const { slug } = await params;
   const post = await getContentBySlug("blog", slug);

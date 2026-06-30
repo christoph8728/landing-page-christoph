@@ -11,9 +11,10 @@
 //   - CTA: dark inverse card; reads same fields as before.
 
 import type { Metadata } from "next";
-import { getConfig } from "@/lib/config";
+import { getConfig, isComingSoon } from "@/lib/config";
 import { getAllContent } from "@/lib/content";
 import { bp } from "@/lib/path";
+import ComingSoon from "@/components/ComingSoon";
 
 // Canonical for the homepage. Resolved against metadataBase (site.url) set in
 // the root layout. Trailing slash matches next.config `trailingSlash: true`.
@@ -22,6 +23,8 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  if (isComingSoon()) return <ComingSoon />;
+
   const config = getConfig();
   const { sections, author } = config;
 
