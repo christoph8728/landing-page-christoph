@@ -98,7 +98,7 @@ features:
   # Set true to seal the whole site behind a minimal "Coming Soon" page
   # (name + email, in the site's design). Hides nav/footer, noindex, and
   # removes all other routes from the build. Flip back to false to restore.
-  coming_soon: false
+  coming_soon: true
   blog: true
   rss: true
   scheduled_posts: true
