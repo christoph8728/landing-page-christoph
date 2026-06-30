@@ -159,6 +159,18 @@ collections:
               - { name: publications_preview_count, label: Pubs preview count, widget: number, value_type: int, default: 5 }
               - { name: blog_preview, label: Blog Preview, widget: boolean }
               - { name: blog_preview_count, label: Blog preview count, widget: number, value_type: int, default: 3 }
+          - name: features
+            label: Features
+            widget: object
+            fields:
+              - { name: coming_soon, label: "Coming Soon mode (seals the whole site)", widget: boolean, default: false, hint: "When ON, the entire site is replaced by a minimal name + email page and hidden from search engines. Turn OFF to restore the full site. Live ~1 min after saving." }
+              - { name: blog, label: Blog, widget: boolean }
+              - { name: rss, label: RSS feeds, widget: boolean }
+              - { name: scheduled_posts, label: Scheduled posts (hide future-dated), widget: boolean }
+              - { name: drafts, label: Hide drafts, widget: boolean }
+              - { name: reading_time, label: Reading time, widget: boolean }
+              - { name: open_graph, label: Open Graph images, widget: boolean }
+              - { name: sitemap, label: Sitemap, widget: boolean }
           - name: content
             label: Page content
             widget: object
